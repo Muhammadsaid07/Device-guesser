@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Device Detector</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+    .container {
+      text-align: center;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #333;
+    }
+    p {
+      font-size: 1.2em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Device Detector</h1>
+    <p id="device-info">Detecting your device...</p>
+  </div>
+
+  <script>
+    function detectDevice() {
+      const width = window.innerWidth;
+      const userAgent = navigator.userAgent;
+
+      let device = "Unknown Device";
+
+      if (/Mobile|Android|iPhone|iPad|iPod/i.test(userAgent)) {
+        device = "Mobile Device";
+      } else if (/Tablet/i.test(userAgent)) {
+        device = "Tablet";
+      } else {
+        device = "Desktop";
+      }
+
+      // Adjust detection for responsive design
+      if (width < 768) {
+        device += " (Small Screen)";
+      } else if (width < 1024) {
+        device += " (Medium Screen)";
+      } else {
+        device += " (Large Screen)";
+      }
+
+      document.getElementById("device-info").textContent = `You are using a ${device}`;
+    }
+
+    // Run the function on load
+    window.onload = detectDevice;
+
+    // Re-run the function on window resize for responsiveness
+    window.onresize = detectDevice;
+  </script>
+</body>
+</html>
